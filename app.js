@@ -1,6 +1,6 @@
 const express = require('express')
 var mongoose = require('mongoose');
-const bodyparser= require('body-parser')
+/* const bodyparser= require('body-parser') */
 
 const app = express()
 
@@ -24,10 +24,16 @@ app.use((req, res, next) => {
   next();
 });    
 
-app.use(bodyparser.json())
+app.use(express.json())
 
 const utilisateur = require('./schemas/users');
 
+var testsign = utilisateur({
+  email: "essai@toto",
+  password: "test123456"
+})
+
+console.log(testsign)
 
 module.exports = app
 
