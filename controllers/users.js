@@ -17,3 +17,4 @@ exports.signup = (req, res, next) => {
     })
     .catch(() => res.status(400).json({message: 'Echec'}));
 }
+

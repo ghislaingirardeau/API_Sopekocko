@@ -26,15 +26,22 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 
-const utilisateur = require('./schemas/users');
+/* const Utilisateurroute = require('./routes/users') */
+const Utilisateur = require('./schemas/users')
 
-var testsign = utilisateur({
-  email: "essai@toto",
-  password: "test123456"
+app.post('/api/users', (req, res, next) => {
+  const user = new Utilisateur({
+    ...req.body
+  })
+  user.save()
+  .then(() => res.status(200).json({message: 'Utilisateur créer'}))
+  .catch(error => res.status(400).json(error))
 })
 
-console.log(testsign)
+app.get('/api/users', (req, res, next) => {
+  Utilisateur.find()
+  .then(users => res.status(200).json({users}))
+  .catch(error => res.status(400).json(error))
+})
 
 module.exports = app
-
-
