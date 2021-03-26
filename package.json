@@ -8,7 +8,6 @@
     "hmr": "nodemon server.js",
     "nodemon": "npm run hmr",
     "start": "node server.js"
-
   },
   "repository": {
     "type": "git",
@@ -21,7 +20,9 @@
   },
   "homepage": "https://github.com/ghislaingirardeau/GirardeauGhislain_6_25032021#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "mongoose": "^5.12.2"
+    "mongoose": "^5.12.2",
+    "mongoose-unique-validator": "^2.0.3"
   }
 }
