@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "api projet 6",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hmr": "nodemon server.js",
+    "nodemon": "npm run hmr",
+    "start": "node server.js"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ghislaingirardeau/GirardeauGhislain_6_25032021.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ghislaingirardeau/GirardeauGhislain_6_25032021/issues"
+  },
+  "homepage": "https://github.com/ghislaingirardeau/GirardeauGhislain_6_25032021#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongoose": "^5.12.2"
+  }
+}
