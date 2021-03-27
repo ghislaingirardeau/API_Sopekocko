@@ -28,7 +28,4 @@ app.use(express.json());
 
 app.use('/api/auth', usersroute);
 
-console.log(process.env.NODE_ENV)
-console.log(process.env.RESTER)
-
 module.exports = app;
