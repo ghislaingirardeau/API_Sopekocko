@@ -1,10 +1,10 @@
 const express = require('express');
 var mongoose = require('mongoose');
-const utilisateurroute = require('./routes/users');
+const usersroute = require('./routes/users');
 
 const app = express();
 
-mongoose.connect('mongodb+srv://Sopekocko:projet6openclassroom@cluster0.d1pzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
+mongoose.connect('mongodb+srv://'+ process.env.DB_USER +':' + process.env.DB_PASSWORD + '@cluster0.d1pzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
     { useNewUrlParser: true, 
       useUnifiedTopology: true
     })
@@ -26,6 +26,9 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.use('/api/auth', utilisateurroute);
+app.use('/api/auth', usersroute);
+
+console.log(process.env.NODE_ENV)
+console.log(process.env.RESTER)
 
 module.exports = app;

@@ -8,5 +8,6 @@ sopekocko
 projet6openclassroom
 
 test id creer 
-email: "essai@toto",
-  password: "test123456"
+ghislain@test.com
+qwerty
+
