@@ -6,8 +6,8 @@ var utilisateurSchema = new mongoose.Schema({
     password: {type: String, require: true}
 })
 
-utilisateurSchema.plugin(uniqueValidator)
+utilisateurSchema.plugin(uniqueValidator);
 
-var utilisateur = mongoose.model('utilisateur', utilisateurSchema)
+var utilisateur = mongoose.model('utilisateur', utilisateurSchema);
 
-module.exports = utilisateur
+module.exports = utilisateur;

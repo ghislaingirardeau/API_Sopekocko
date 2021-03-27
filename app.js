@@ -1,8 +1,8 @@
-const express = require('express')
+const express = require('express');
 var mongoose = require('mongoose');
-/* const bodyparser= require('body-parser') */
+const utilisateurroute = require('./routes/users');
 
-const app = express()
+const app = express();
 
 mongoose.connect('mongodb+srv://Sopekocko:projet6openclassroom@cluster0.d1pzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
     { useNewUrlParser: true, 
@@ -24,24 +24,8 @@ app.use((req, res, next) => {
   next();
 });    
 
-app.use(express.json())
+app.use(express.json());
 
-/* const Utilisateurroute = require('./routes/users') */
-const Utilisateur = require('./schemas/users')
+app.use('/api/auth', utilisateurroute);
 
-app.post('/api/users', (req, res, next) => {
-  const user = new Utilisateur({
-    ...req.body
-  })
-  user.save()
-  .then(() => res.status(200).json({message: 'Utilisateur créer'}))
-  .catch(error => res.status(400).json(error))
-})
-
-app.get('/api/users', (req, res, next) => {
-  Utilisateur.find()
-  .then(users => res.status(200).json({users}))
-  .catch(error => res.status(400).json(error))
-})
-
-module.exports = app
+module.exports = app;
