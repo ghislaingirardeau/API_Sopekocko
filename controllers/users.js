@@ -1,10 +1,8 @@
-const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const User = require('../schemas/users');
 
 const salt = 10;
-
-const User = require('../schemas/users');
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, salt)
@@ -13,9 +11,8 @@ exports.signup = (req, res, next) => {
             email: req.body.email,
             password: hash
         })
-        console.log(utilisateur)
         utilisateur.save()
-        .then(() => status(201).json({message: 'Un nouvel utilisateur a été enrgistré'}))
+        .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
         .catch(() => res.status(400).json({message: "Echec enregistrement de l'utilisateur"}))
     })
     .catch(() => res.status(400).json({message: 'Echec'}));
@@ -26,18 +23,12 @@ exports.login = (req, res, next) => {
         .then(user => {
             if(!user){
                 return res.status(401).json({message: "Cet email n'est pas valide"})
-                
             }
-            
-
             bcrypt.compare(req.body.password, user.password)
-            
             .then(valid => {
                 if (!valid){
                     return res.status(401).json({message: "Ce mot de passe n'est pas valide"})
-                    
                 }
-                
                 res.status(200).json({
                 userId: user._id,
                 token: jwt.sign({
@@ -46,11 +37,10 @@ exports.login = (req, res, next) => {
                 { expriresIn: '3h'}
                 )
             })
-            console.log(valid)
-            .catch((error) => res.status(401).json(error))    
+            .catch(() => res.status(401).json({message: "erreur login"}))    
         })
-        console.log(user)
-        .catch((error) => res.status(401).json(error))   
+        console.log("la connexion fonctionne")
+        .catch(() => res.status(401).json({message: "login impossible"}))   
     })
 };
 
