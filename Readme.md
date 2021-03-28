@@ -9,7 +9,7 @@ projet6openclassroom
 
 test id 
 ghislain67@test.com
-qwertyuio
+
 
 Question :
 token qui n'apparait pas dans le header authorization ?
