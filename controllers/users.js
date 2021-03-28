@@ -28,19 +28,24 @@ exports.login = (req, res, next) => {
             .then(valid => {
                 if (!valid){
                     return res.status(401).json({message: "Ce mot de passe n'est pas valide"})
-                }
+                }     
                 res.status(200).json({
-                userId: user._id,
-                token: jwt.sign({
-                    userId: user._id 
-                }, 'BIENVENUE A SOPEKOCKO',
-                { expriresIn: '3h'}
-                )
+                    userId: user._id,
+                    token: jwt.sign(
+                    {userId: user._id}, "RANDOM_TOKEN_SECRET",
+                    { expiresIn: '24h'})  
+                })
             })
-            .catch(() => res.status(401).json({message: "erreur login"}))    
+            .catch(() => res.status(500).json({message: "erreur login"}))   
         })
-        console.log("la connexion fonctionne")
-        .catch(() => res.status(401).json({message: "login impossible"}))   
-    })
+        .catch(() => res.status(500).json({message: "login impossible"}))   
 };
+
+/* APERCU BASE DE DONNEES USERS: PAS DANS LE PROJET */
+
+exports.users = (req, res, next) => {
+    User.find()
+        .then((users) => res.status(200).json({users}))
+        .catch(() => res.status(400).json({message: "pas de users" }))
+}
 
