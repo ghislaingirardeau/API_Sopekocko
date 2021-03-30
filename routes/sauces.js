@@ -10,5 +10,8 @@ router.delete('/sauces/:id', sauces)
 router.get('/sauces/:id', sauces) */
 router.get('/sauces', authentification, sauces.listeSauces)
 
+/* MODE DEVELOPPEMENT */
+router.delete('/sauces', sauces.deletesauce)
+
 
 module.exports = router

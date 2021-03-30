@@ -15,23 +15,22 @@ exports.createSauce = (req, res, next) => {
         likes: 0,
         dislikes: 0
     }); 
-    
-    res.status(201).json({sauce})
- 
+    sauce.save()
+    .then((sauce) => res.status(201).json({sauce}))
+    .catch(() => res.status(401).json({message: "La sauce n'a pas été créer"}))
 };
 
 exports.updatesauce = (req, res, next) => {
 
 }
 
-exports.deletesauce = (req, res, next) => {
 
+/* MODE DEVELOPPEMENT */
+exports.deletesauce = (req, res, next) => {
+        sauces.deleteMany({sauces})
+        .then(() => res.status(201).json({message: "suppression OK"}))
+        .catch(() => res.status(401).json({message: "echec supp"})) 
 }
 
 
 
-/* sauce.save()
-    .then((sauce) => res.status(201).json({sauce}))
-    .catch(() => res.status(401).json({message: "La sauce n'a pas été créer"})) */
-
-    /* Possible probleme du a l'image, c'est pour cela que le body n'apparait pas */
