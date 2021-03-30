@@ -8,6 +8,9 @@ router.post('/sauces', authentification, multer, sauces.createSauce)
 /* router.put('/sauces/:id', sauces)
 router.delete('/sauces/:id', sauces)
  */
+
+/* !!!!! AJOUTER LES AUTHENFICATION POST TEST */
+router.put('/sauces/:id', multer, sauces.updateSauce)
 router.get('/sauces/:id', sauces.findSauce)
 router.get('/sauces', sauces.listeSauces)
 

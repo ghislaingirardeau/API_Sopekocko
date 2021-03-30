@@ -34,9 +34,12 @@ exports.updateSauce = (req, res, next) => {
         ...JSON.parse(req.body.sauce),
         imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
     } :
-    { ...req.body}
-    sauce.updateOne({_id: req.params.id}, {...req.body})
-    
+    { 
+        ...req.body
+    }
+    sauces.updateOne({_id: req.params.id}, {...sauceObject, _id: req.params.id}) /* quand il fait la modif de la sauce je confirme l'id */
+     .then(() => res.status(200).json({message: "La sauce a bien été modifiée"}))
+     .catch(() => res.status(400).json({message: "modification impossible"}))
 }
 
 
