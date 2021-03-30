@@ -9,7 +9,6 @@ const auth = (req, res, next) => {
             res.status(404).json({error :"Cet Id n'existe pas !"})
         }
         else {
-            console.log("ca marche")
             next()
         }
     }

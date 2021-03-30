@@ -16,10 +16,12 @@ exports.createSauce = (req, res, next) => {
         dislikes: 0,
         usersLiked: [],
         usersDisliked: []
-    }); 
-    sauce.save()
+    });
+    res.status(201).json({sauce})
+    /* sauce.save()
     .then((sauce) => res.status(201).json({sauce}))
-    .catch(() => res.status(401).json({message: "La sauce n'a pas été créer"}))
+    .catch(() => res.status(401).json({message: "La sauce n'a pas été créer"})) */
+    
 };
 
 exports.updatesauce = (req, res, next) => {
