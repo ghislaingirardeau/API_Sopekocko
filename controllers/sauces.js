@@ -1,5 +1,4 @@
 const sauces = require('../schemas/sauces')
-const fs = require('fs')
 
 exports.listeSauces = (req, res, next) => {
     sauces.find()
@@ -23,8 +22,10 @@ exports.createSauce = (req, res, next) => {
     
 };
 
-exports.updatesauce = (req, res, next) => {
-
+exports.findSauce = (req, res, next) => {
+    sauces.findOne({_id: req.params.id})
+    .then((sauce) => res.status(200).json({sauce}))
+    .catch(() => res.status(401).json({message: "Cette sauce n'existe pas"}))
 }
 
 
