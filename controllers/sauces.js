@@ -28,6 +28,20 @@ exports.findSauce = (req, res, next) => {
     .catch(() => res.status(401).json({message: "Cette sauce n'existe pas"}))
 }
 
+exports.updateSauce = (req, res, next) => {
+    const sauceObject = req.file ?
+    {
+        ...JSON.parse(req.body.sauce),
+        imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
+    } :
+    { ...req.body}
+    sauce.updateOne({_id: req.params.id}, {...req.body})
+    
+}
+
+
+
+
 
 /* MODE DEVELOPPEMENT */
 exports.deletesauce = (req, res, next) => {
