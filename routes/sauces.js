@@ -11,7 +11,7 @@ router.post('/sauces', authentification, multer, sauces.createSauce)
 
 /* !!!!! AJOUTER LES AUTHENFICATION POST TEST */
 router.put('/sauces/:id', authentification, multer, sauces.updateSauce)
-router.delete('/sauces/:id', authentification, multer, sauces.deleteSauce)
+router.delete('/sauces/:id', authentification, sauces.deleteSauce)
 router.get('/sauces/:id', authentification, sauces.findSauce)
 router.get('/sauces', authentification, sauces.listeSauces)
 
