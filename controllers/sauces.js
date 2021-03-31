@@ -2,7 +2,7 @@ const sauces = require('../schemas/sauces')
 
 exports.listeSauces = (req, res, next) => {
     sauces.find()
-    .then(sauces => res.status(200).json({sauces}))
+    .then(sauces => res.status(200).json(sauces))
     .catch(() => res.status(404).json({message: "impossible de recuperer les sauces"}))
 }
 
@@ -24,7 +24,7 @@ exports.createSauce = (req, res, next) => {
 
 exports.findSauce = (req, res, next) => {
     sauces.findOne({_id: req.params.id})
-    .then((sauce) => res.status(200).json({sauce}))
+    .then((sauce) => res.status(200).json(sauce))
     .catch(() => res.status(401).json({message: "Cette sauce n'existe pas"}))
 }
 
@@ -38,7 +38,7 @@ exports.updateSauce = (req, res, next) => {
         ...req.body
     }
     sauces.updateOne({_id: req.params.id}, {...sauceObject, _id: req.params.id}) /* quand il fait la modif de la sauce je confirme l'id */
-     .then(() => res.status(200).json({message: "La sauce a bien été modifiée"}))
+     .then((sauce) => res.status(200).json({sauce}))
      .catch(() => res.status(400).json({message: "modification impossible"}))
 }
 

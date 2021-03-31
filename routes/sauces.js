@@ -10,9 +10,9 @@ router.delete('/sauces/:id', sauces)
  */
 
 /* !!!!! AJOUTER LES AUTHENFICATION POST TEST */
-router.put('/sauces/:id', multer, sauces.updateSauce)
-router.get('/sauces/:id', sauces.findSauce)
-router.get('/sauces', sauces.listeSauces)
+router.put('/sauces/:id', authentification, multer, sauces.updateSauce)
+router.get('/sauces/:id', authentification, sauces.findSauce)
+router.get('/sauces', authentification, sauces.listeSauces)
 
 /* MODE DEVELOPPEMENT */
 router.delete('/sauces', sauces.deletesauce)
