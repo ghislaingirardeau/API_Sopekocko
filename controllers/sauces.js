@@ -53,8 +53,8 @@ exports.deleteSauce = (req, res, next) => {
        fs.unlink(`images/${imageName}`, () => { 
         
             sauces.deleteOne({_id : req.params.id})
-                .then(() => res.status(200).json({message: "suppression réussie"}))  
-                .catch(() => res.status(400).json({message: "suppression impossible"}))
+            .then(() => res.status(200).json({message: "suppression réussie"}))  
+            .catch(() => res.status(400).json({message: "suppression impossible"}))
         })  
     })
     .catch(() => res.status(500).json({message: "image non trouvé"})) 
