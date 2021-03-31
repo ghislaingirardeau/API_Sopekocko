@@ -5,18 +5,11 @@ const multer = require('../Middleware/multer')
 const router = express.Router()
 
 router.post('/sauces', authentification, multer, sauces.createSauce)
-/* router.put('/sauces/:id', sauces)
 
- */
-
-/* !!!!! AJOUTER LES AUTHENFICATION POST TEST */
 router.put('/sauces/:id', authentification, multer, sauces.updateSauce)
 router.delete('/sauces/:id', authentification, sauces.deleteSauce)
 router.get('/sauces/:id', authentification, sauces.findSauce)
 router.get('/sauces', authentification, sauces.listeSauces)
-
-/* MODE DEVELOPPEMENT */
-/* router.delete('/sauces', sauces.deleteAllsauce) */
 
 
 module.exports = router

@@ -2,6 +2,7 @@ const express = require('express');
 var mongoose = require('mongoose');
 const usersRoute = require('./routes/users');
 const saucesRoutes = require('./routes/sauces');
+const adminRoutes = require('./routes/Admin')
 const path = require('path');
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/auth', usersRoute);
 app.use('/api', saucesRoutes);
+app.use('/api', adminRoutes);
 
 module.exports = app;
 

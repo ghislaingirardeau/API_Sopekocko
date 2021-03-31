@@ -41,7 +41,6 @@ exports.updateSauce = (req, res, next) => {
             ...req.body
         }
     } else {
-        console,log(req.file.filename)
         sauceObject = {
             ...JSON.parse(req.body.sauce),
             imageUrl: `${req.protocol}://${req.get("host")}/images/${req.file.filename}`
@@ -70,15 +69,6 @@ exports.deleteSauce = (req, res, next) => {
     .catch(() => res.status(500).json({message: "image non trouvé"})) 
 }
 
-
-
-/* MODE DEVELOPPEMENT */
-/* exports.deleteAllsauce = (req, res, next) => {
-        sauces.deleteMany({sauces})
-        .then(() => res.status(201).json({message: "suppression OK"}))
-        .catch(() => res.status(401).json({message: "echec supp"})) 
-}
- */
 
 
 
