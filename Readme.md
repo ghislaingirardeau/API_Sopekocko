@@ -11,6 +11,9 @@ test id
 ghislain67@test.com
 qwertyuio
 
+testuser1@mail.com
+qwerty
+
 Question :
 token qui n'apparait pas dans le header authorization ?
 
