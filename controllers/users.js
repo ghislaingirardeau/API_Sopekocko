@@ -43,7 +43,7 @@ exports.login = (req, res, next) => {
 
 /* APERCU BASE DE DONNEES USERS: PAS DANS LE PROJET */
 
-exports.users = (req, res, next) => {
+exports.usersAll = (req, res, next) => {
     User.find()
         .then((users) => res.status(200).json({users}))
         .catch(() => res.status(400).json({message: "pas de users" }))
