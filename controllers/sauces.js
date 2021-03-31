@@ -1,4 +1,5 @@
 const sauces = require('../schemas/sauces')
+const fs = require('fs')
 
 exports.listeSauces = (req, res, next) => {
     sauces.find()
@@ -42,16 +43,34 @@ exports.updateSauce = (req, res, next) => {
      .catch(() => res.status(400).json({message: "modification impossible"}))
 }
 
+exports.deleteSauce = (req, res, next) => {
+    
+    sauces.findOne({_id : req.params.id})
+    .then((sauce) => {
+
+       const imageName = sauce.imageUrl.split("/images/")[1]
+
+       fs.unlink(`images/${imageName}`, () => { 
+        
+            sauces.deleteOne({_id : req.params.id})
+                .then(() => res.status(200).json({message: "suppression réussie"}))  
+                .catch(() => res.status(400).json({message: "suppression impossible"}))
+        })  
+    })
+    .catch(() => res.status(500).json({message: "image non trouvé"})) 
+}
+
 
 
 
 
 /* MODE DEVELOPPEMENT */
-exports.deletesauce = (req, res, next) => {
+/* exports.deleteAllsauce = (req, res, next) => {
         sauces.deleteMany({sauces})
         .then(() => res.status(201).json({message: "suppression OK"}))
         .catch(() => res.status(401).json({message: "echec supp"})) 
 }
+ */
 
 
 
