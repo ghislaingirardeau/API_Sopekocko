@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const auth = (req, res, next) => {
+const authentification = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1]; /* A DETERMNIER OU RECUP LE TOKEN: header ou requete */
         const decodedToken = jwt.verify(token, "RANDOM_TOKEN_CONNEXION_SOPEKOCKO")
@@ -17,4 +17,4 @@ const auth = (req, res, next) => {
     }
 }
 
-module.exports = auth
+module.exports = authentification
