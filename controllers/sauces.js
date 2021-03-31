@@ -71,9 +71,6 @@ exports.deleteSauce = (req, res, next) => {
 }
 
 
-
-
-
 /* MODE DEVELOPPEMENT */
 /* exports.deleteAllsauce = (req, res, next) => {
         sauces.deleteMany({sauces})
@@ -81,6 +78,7 @@ exports.deleteSauce = (req, res, next) => {
         .catch(() => res.status(401).json({message: "echec supp"})) 
 }
  */
+
 
 
 

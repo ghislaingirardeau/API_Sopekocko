@@ -41,11 +41,17 @@ exports.login = (req, res, next) => {
         .catch(() => res.status(500).json({message: "login impossible"}))   
 };
 
-/* APERCU BASE DE DONNEES USERS: PAS DANS LE PROJET */
 
+/* ADMIN DE LA BASE DE DONNEE */
 exports.usersAll = (req, res, next) => {
     User.find()
         .then((users) => res.status(200).json({users}))
         .catch(() => res.status(400).json({message: "pas de users" }))
+}
+
+exports.deleteUser = (req, res, next) => {
+    User.deleteOne({_id : req.params.id})
+    .then(() => res.status(200).json({message: 'suppression réussie'}))
+    .catch(() => res.status(400).json({message: 'Echec suppression'}))
 }
 
