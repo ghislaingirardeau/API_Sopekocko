@@ -14,8 +14,8 @@ exports.deleteUser = (req, res, next) => {
     .catch(() => res.status(400).json({message: 'Echec suppression'}))
 }
 
-exports.deleteAllsauce = (req, res, next) => {
-        sauces.deleteMany({sauces})
+exports.deleteSauce = (req, res, next) => {
+        sauces.deleteOne({_id : req.params.id})
         .then(() => res.status(201).json({message: "suppression OK"}))
         .catch(() => res.status(401).json({message: "echec supp"})) 
 }
