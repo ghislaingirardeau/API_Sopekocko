@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const likeSchema = new mongoose.Schema ({
-    userID: {type: String, require: true},
+    userId: {type: String},
     jaime: {type: Number}
 })
 
