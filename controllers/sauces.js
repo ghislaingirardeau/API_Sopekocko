@@ -1,7 +1,7 @@
 const sauces = require('../schemas/sauces')
 const fs = require('fs')
 
-exports.listeSauces = (req, res, next) => {
+exports.tableauSauces = (req, res, next) => {
 
     sauces.find()
     .then(sauces => res.status(200).json(sauces))

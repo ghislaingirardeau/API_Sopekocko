@@ -4,7 +4,6 @@ const authAdmin = require ('../Middleware/admin')
 const router = express.Router()
 
 /* ADMIN: POUR LA GESTION DES COMPTES USERS */
-/* AJOUTER UNE AUTHENTIFICATION */
 
 router.get(`${process.env.ADMIN_ALLUSERS}`, authAdmin, userAdmin.usersAll);
 router.delete(`${process.env.ADMIN_DELETEUSER}`, authAdmin, userAdmin.deleteUser);
