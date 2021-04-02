@@ -8,7 +8,7 @@ const authAdmin =(req, res, next) => {
         if (req.body.userId && req.body.userId != userId) {
             res.status(404).json({error :"Cet Id n'existe pas !"})
         }
-        if (userId === `${process.env.ADMIN_ID}`) {
+        if (userId === `${process.env.ADMIN_ID}`) {   /* TEST AJOUT DE && req.body.userId dans la condition */
             next()
         }
         else {

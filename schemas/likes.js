@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
 const likeSchema = new mongoose.Schema ({
-    userId: {type: String},
-    jaime: {type: Number}
+    userId: {type: String /* , require: true */},
+    jaime: {type: Number, require: true}
 })
 
 const likes = mongoose.model('likes', likeSchema)

@@ -1,37 +1,51 @@
 const likes = require ('../schemas/likes')
 const sauces = require ('../schemas/sauces')
 
+
+
 exports.modifyLikes = (req, res, next) => {
     
     sauces.findOne({_id: req.params.id})
     .then((sauce) => {
-        res.status(200).json(sauce) /* recuperer l'userId de la sauce concerné, pour l'envoyer dans le schema */
-
+        
         const like = new likes({
-            userId: sauce.userId,
-            jaime: req.body.jaime
+            ...req.body
         })
-        console.log(like)
+        
         delete like._id
         
-        if (like.jaime === 0) {
-        console.log("je change") 
-        }  
-        if (like.jaime === 1) {
-        console.log("j'aime") 
-        }  
-        if (like.jaime === -1) {
-            console.log("je n'aime pas") 
-            } 
+        if (like.jaime === 1 && sauce.usersLiked.indexOf(like.userId) === -1) {
+            
+            var compteur = sauce.likes + 1
+            sauce.likes = compteur
+            sauce.usersLiked.push(like.userId)
+            res.status(200).json(sauce)
+          
+        } else{
+            console.log('userId deja present dans le tableau')
+        }
+        if (like.jaime === -1 && sauce.usersDisliked.indexOf(like.userId) === -1) {
+            
+            var compteur = sauce.likes + 1
+            sauce.dislikes = compteur
+            sauce.usersDisliked.push(like.userId)
+            res.status(200).json(sauce)
+          
+        } else{
+            console.log('userId deja present dans le tableau')
+        }
+        
+          
     })
     .catch()
 }
 
-/* if(req.body.jaime === 0) {
 
-        }
-    sauces.findOne({_id: req.params.id})
-    .then(() => {
-        console.log("id trouve")
-    })
-    .catch() */
+/*     */
+
+/* const ajoutLikes = function (nmbre, sauce) {
+    var compteur = sauce.likes + nmbre
+    sauce.likes = compteur
+    sauce.usersLiked.push(like.userId)
+    res.status(200).json(sauce) 
+} */
