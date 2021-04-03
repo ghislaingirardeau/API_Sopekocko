@@ -4,12 +4,13 @@ const authentification = require('../Middleware/auth')
 const multer = require('../Middleware/multer')
 const router = express.Router()
 
-router.post('/sauces', authentification, multer, sauces.createSauce)
+router.get('/', authentification, sauces.tableauSauces)
+router.post('/', authentification, multer, sauces.createSauce)
 
-router.put('/sauces/:id', authentification, multer, sauces.updateSauce)
-router.delete('/sauces/:id', authentification, sauces.deleteSauce)
-router.get('/sauces/:id',  /* authentification, */ sauces.findSauce)
-router.get('/sauces', authentification, sauces.tableauSauces)
+router.get('/:id',  authentification, sauces.findSauce)
+router.put('/:id', authentification, multer, sauces.updateSauce)
+router.delete('/:id', authentification, sauces.deleteSauce)
 
+router.post('/:id/like', sauces.modifyLikes)
 
 module.exports = router

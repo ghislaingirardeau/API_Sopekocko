@@ -1,4 +1,4 @@
-const User = require('../schemas/users');
+const User = require('../schemas/users')
 const sauces = require('../schemas/sauces')
 
 /* ADMIN DE LA BASE DE DONNEE */

@@ -1,8 +1,8 @@
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const User = require('../schemas/users');
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const User = require('../schemas/users')
 
-const salt = 10;
+const salt = 10
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, salt)
@@ -15,7 +15,7 @@ exports.signup = (req, res, next) => {
         .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
         .catch(() => res.status(400).json({message: "Echec enregistrement de l'utilisateur"}))
     })
-    .catch(() => res.status(400).json({message: 'Echec'}));
+    .catch(() => res.status(400).json({message: 'Echec'}))
 }
 
 exports.login = (req, res, next) => {
@@ -39,7 +39,7 @@ exports.login = (req, res, next) => {
             .catch(() => res.status(500).json({message: "erreur login"}))   
         })
         .catch(() => res.status(500).json({message: "login impossible"}))   
-};
+}
 
 
 

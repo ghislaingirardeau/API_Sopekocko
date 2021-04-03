@@ -8,3 +8,5 @@ const likeSchema = new mongoose.Schema ({
 const likes = mongoose.model('likes', likeSchema)
 
 module.exports = likes
+
+/* suppr */
