@@ -7,7 +7,6 @@ const authentification = (req, res, next) => {
         const userId = decodedToken.userId
         if (req.body.userId && req.body.userId != userId) {
             res.status(404).json({error :"Cet Id n'existe pas !"})
-            /* est ce que admin ? */
         }
         else {
             next()

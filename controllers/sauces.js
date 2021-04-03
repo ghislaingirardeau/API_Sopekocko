@@ -89,7 +89,6 @@ exports.modifyLikes = (req, res, next) => {
 
             sauce.likes++
             sauce.usersLiked.push(userId)
-            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))                     
@@ -99,7 +98,6 @@ exports.modifyLikes = (req, res, next) => {
             
             sauce.dislikes++
             sauce.usersDisliked.push(userId)
-            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))          
@@ -111,7 +109,6 @@ exports.modifyLikes = (req, res, next) => {
                 
             sauce.likes--
             sauce.usersLiked.splice(indexLiked, 1) /* je supprime l'userId a son index array correspondant */
-            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))                
@@ -121,7 +118,6 @@ exports.modifyLikes = (req, res, next) => {
 
             sauce.dislikes--
             sauce.usersDisliked.splice(indexDisliked, 1)
-            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))  
