@@ -77,7 +77,6 @@ exports.modifyLikes = (req, res, next) => {
         const body = {
             ...req.body
         }
-        
         const like = body.like
         const userId = body.userId
         
@@ -103,27 +102,23 @@ exports.modifyLikes = (req, res, next) => {
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))          
         } 
 
-        if (like === 0) { 
-
-            if (indexLiked != -1) {
+        if (like === 0 && indexLiked != -1) { 
                 
             sauce.likes--
             sauce.usersLiked.splice(indexLiked, 1) /* je supprime l'userId a son index array correspondant */
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))                
-            }
+        }
 
-            if (indexDisliked != -1) {
-
+        if (like === 0 && indexDisliked != -1) {
+            
             sauce.dislikes--
             sauce.usersDisliked.splice(indexDisliked, 1)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))  
-            }
-
-        }       
+        }      
     })
     .catch(() => res.status(400).json({message: "Impossible de trouver la sauce"}))
 }
