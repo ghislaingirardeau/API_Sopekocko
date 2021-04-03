@@ -13,7 +13,7 @@ exports.signup = (req, res, next) => {
         })
         utilisateur.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
-        .catch(() => res.status(401).json({message: "Cette email est deja utilisé"}))
+        .catch(() => res.status(401).json({message: "Cet email est deja utilisé"}))
     })
     .catch(() => res.status(400).json({message: 'Echec'}))
 }

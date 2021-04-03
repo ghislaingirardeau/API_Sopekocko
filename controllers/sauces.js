@@ -1,5 +1,4 @@
 const sauces = require('../schemas/sauces')
-const likes = require ('../schemas/likes')
 const fs = require('fs')
 
 exports.tableauSauces = (req, res, next) => {
@@ -23,7 +22,7 @@ exports.createSauce = (req, res, next) => {
 
     sauce.save()
     .then((sauce) => res.status(201).json({sauce}))
-    .catch(() => res.status(401).json({message: "La sauce n'a pas été créée"}))
+    .catch(() => res.status(400).json({message: "La sauce n'a pas été créée"}))
     
 }
 
@@ -31,7 +30,7 @@ exports.findSauce = (req, res, next) => {
 
     sauces.findOne({_id: req.params.id})
     .then((sauce) => res.status(200).json(sauce))
-    .catch(() => res.status(401).json({message: "Cette sauce n'existe pas"}))
+    .catch(() => res.status(404).json({message: "Cette sauce n'existe pas"}))
 }
 
 exports.updateSauce = (req, res, next) => {
@@ -77,39 +76,44 @@ exports.modifyLikes = (req, res, next) => {
     sauces.findOne({_id: req.params.id})
     .then((sauce) => {
         
-        const like = new likes({
+        const body = {
             ...req.body
-        })
+        }
         
-        delete like._id
+        const like = body.like
+        const userId = body.userId
+        
         /* Je recupere les valeurs des index userId que je mets comme conditions */
-        var indexLiked = sauce.usersLiked.indexOf(like.userId)
-        var indexDisliked = sauce.usersDisliked.indexOf(like.userId)
+        var indexLiked = sauce.usersLiked.indexOf(userId)
+        var indexDisliked = sauce.usersDisliked.indexOf(userId)
 
-        if (like.jaime === 1 && indexLiked === -1 && indexDisliked === -1) { /* userid est dans auncun des tableaux */
+        if (like === 1 && indexLiked === -1 && indexDisliked === -1) { /* userid est dans auncun des tableaux */
 
             sauce.likes += 1
-            sauce.usersLiked.push(like.userId)
+            sauce.usersLiked.push(userId)
+            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))                     
         }
         
-        if (like.jaime === -1 && indexLiked === -1 && indexDisliked === -1) {
+        if (like === -1 && indexLiked === -1 && indexDisliked === -1) {
             
             sauce.dislikes += 1
-            sauce.usersDisliked.push(like.userId)
+            sauce.usersDisliked.push(userId)
+            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))          
         } 
 
-        if (like.jaime === 0) { 
+        if (like === 0) { 
 
             if (indexLiked != -1) {
                 
             sauce.likes -= 1
             sauce.usersLiked.splice(indexLiked, 1) /* je supprime l'userId a son index array correspondant */
+            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))                
@@ -119,24 +123,13 @@ exports.modifyLikes = (req, res, next) => {
 
             sauce.dislikes -= 1
             sauce.usersDisliked.splice(indexDisliked, 1)
+            console.log(sauce)
             sauce.save()
                 .then((sauce) => res.status(201).json(sauce))
                 .catch(() => res.status(401).json({message: "erreur envoie du like"}))  
             }
 
-        } 
-        
-        /* RAS POUR TEST A SUPPR */
-        if (like.jaime === 2) {
-            sauce.dislikes = 0
-            sauce.likes = 0
-            sauce.usersDisliked = []
-            sauce.usersLiked = []
-            sauce.save()
-                .then((sauce) => res.status(201).json(sauce))
-                .catch(() => res.status(401).json({message: "erreur envoie du like"}))  
-        }
-       
+        }       
     })
     .catch(() => res.status(400).json({message: "Impossible de trouver la sauce"}))
 }
