@@ -69,8 +69,6 @@ exports.deleteSauce = (req, res, next) => {
     .catch(() => res.status(500).json({message: "image non trouvé"})) 
 }
 
-/* recherche du jaime dans la req.body */
-
 exports.modifyLikes = (req, res, next) => {
     
     sauces.findOne({_id: req.params.id})
@@ -83,13 +81,13 @@ exports.modifyLikes = (req, res, next) => {
         const like = body.like
         const userId = body.userId
         
-        /* Je recupere les valeurs des index userId que je mets comme conditions */
+        /* Je recupere les valeurs des index userId contenu dans les tableaux que je mets comme conditions */
         var indexLiked = sauce.usersLiked.indexOf(userId)
         var indexDisliked = sauce.usersDisliked.indexOf(userId)
 
         if (like === 1 && indexLiked === -1 && indexDisliked === -1) { /* userid est dans auncun des tableaux */
 
-            sauce.likes += 1
+            sauce.likes++
             sauce.usersLiked.push(userId)
             console.log(sauce)
             sauce.save()
@@ -99,7 +97,7 @@ exports.modifyLikes = (req, res, next) => {
         
         if (like === -1 && indexLiked === -1 && indexDisliked === -1) {
             
-            sauce.dislikes += 1
+            sauce.dislikes++
             sauce.usersDisliked.push(userId)
             console.log(sauce)
             sauce.save()
@@ -111,7 +109,7 @@ exports.modifyLikes = (req, res, next) => {
 
             if (indexLiked != -1) {
                 
-            sauce.likes -= 1
+            sauce.likes--
             sauce.usersLiked.splice(indexLiked, 1) /* je supprime l'userId a son index array correspondant */
             console.log(sauce)
             sauce.save()
@@ -121,7 +119,7 @@ exports.modifyLikes = (req, res, next) => {
 
             if (indexDisliked != -1) {
 
-            sauce.dislikes -= 1
+            sauce.dislikes--
             sauce.usersDisliked.splice(indexDisliked, 1)
             console.log(sauce)
             sauce.save()
@@ -133,13 +131,6 @@ exports.modifyLikes = (req, res, next) => {
     })
     .catch(() => res.status(400).json({message: "Impossible de trouver la sauce"}))
 }
-
-/* var ajoutLikes = function (likes, tableau, user) {
-    likes += 1
-    tableau.push(user)
-    console.log(likes)
-}
-} */
 
 
 
