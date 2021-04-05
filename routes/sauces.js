@@ -4,7 +4,7 @@ const authentification = require('../Middleware/auth')
 const multer = require('../Middleware/multer')
 const router = express.Router()
 
-router.get('/', authentification, sauces.tableauSauces)
+router.get('/', authentification, sauces.toutesLesSauces)
 router.post('/', authentification, multer, sauces.createSauce)
 
 router.get('/:id',  authentification, sauces.findSauce)
