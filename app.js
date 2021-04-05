@@ -6,7 +6,7 @@ const path = require('path')
 
 const app = express()
 
-mongoose.connect('mongodb+srv://'+ process.env.DB_USER +':' + process.env.DB_PASSWORD + '@cluster0.d1pzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
+mongoose.connect('mongodb+srv://'+ process.env.DB_ADMIN_LOG +':' + process.env.DB_ADMIN_PASSWORD + '@cluster0.d1pzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
     { useNewUrlParser: true, 
       useUnifiedTopology: true
     })
@@ -29,11 +29,8 @@ app.use((req, res, next) => {
 app.use(express.json())
 
 app.use('/images', express.static(path.join(__dirname, 'images')))
-
 app.use('/api/auth', usersRoute)
 app.use('/api/sauces', saucesRoutes)
-
-
 
 module.exports = app
 
