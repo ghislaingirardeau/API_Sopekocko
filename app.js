@@ -6,7 +6,7 @@ const path = require('path')
 
 const app = express()
 
-mongoose.connect('mongodb+srv://'+ process.env.DB_ADMIN_LOG +':' + process.env.DB_ADMIN_PASSWORD + '@cluster0.d1pzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
+mongoose.connect('mongodb+srv://'+ process.env.DB_USER_LOG +':' + process.env.DB_USER_PASSWORD + '@cluster0.d1pzv.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', 
     { useNewUrlParser: true, 
       useUnifiedTopology: true
     })
