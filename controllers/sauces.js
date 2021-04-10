@@ -22,8 +22,7 @@ exports.createSauce = (req, res, next) => {
 
     sauce.save()
     .then((sauce) => res.status(201).json({sauce}))
-    .catch(() => res.status(400).json({message: "La sauce n'a pas été créée"}))
-    
+    .catch(() => res.status(400).json({message: "La sauce n'a pas été créée"}))   
 }
 
 exports.findSauce = (req, res, next) => {
@@ -88,37 +87,32 @@ exports.modifyLikes = (req, res, next) => {
 
             sauce.likes++
             sauce.usersLiked.push(userId)
-            sauce.save()
-                .then((sauce) => res.status(201).json(sauce))
-                .catch(() => res.status(401).json({message: "erreur envoie du like"}))                     
-        }
+                               
+        } 
         
-        if (like === -1 && indexLiked === -1 && indexDisliked === -1) {
+        else if (like === -1 && indexLiked === -1 && indexDisliked === -1) {
             
             sauce.dislikes++
             sauce.usersDisliked.push(userId)
-            sauce.save()
-                .then((sauce) => res.status(201).json(sauce))
-                .catch(() => res.status(401).json({message: "erreur envoie du like"}))          
+                    
         } 
 
-        if (like === 0 && indexLiked != -1) { 
+        else if (like === 0 && indexLiked != -1) { 
                 
             sauce.likes--
             sauce.usersLiked.splice(indexLiked, 1) /* je supprime l'userId a son index array correspondant */
-            sauce.save()
-                .then((sauce) => res.status(201).json(sauce))
-                .catch(() => res.status(401).json({message: "erreur envoie du like"}))                
+                       
         }
 
-        if (like === 0 && indexDisliked != -1) {
+        else if (like === 0 && indexDisliked != -1) {
             
             sauce.dislikes--
             sauce.usersDisliked.splice(indexDisliked, 1)
-            sauce.save()
-                .then((sauce) => res.status(201).json(sauce))
-                .catch(() => res.status(401).json({message: "erreur envoie du like"}))  
-        }      
+             
+        }
+        sauce.save()
+            .then((sauce) => res.status(201).json(sauce))
+            .catch(() => res.status(401).json({message: "erreur envoie du like"}))        
     })
     .catch(() => res.status(400).json({message: "Impossible de trouver la sauce"}))
 }
