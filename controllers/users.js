@@ -5,25 +5,32 @@ const User = require('../schemas/users')
 const salt = 10
 
 exports.signup = (req, res, next) => {
+
+    var buffer = Buffer.from(req.body.email);
+
     bcrypt.hash(req.body.password, salt)
     .then(hash => {
         const utilisateur = new User ({ 
-            email: req.body.email,
+            email: buffer,
             password: hash
         })
         utilisateur.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
-        .catch(() => res.status(401).json({message: "Cet email est deja utilisé"}))
+        .catch(() => res.status(401).json({message: "Cet email est deja utilisé"}))              
     })
     .catch(() => res.status(400).json({message: 'Echec'}))
 }
 
 exports.login = (req, res, next) => {
-    User.findOne({email: req.body.email})
+    
+    var buffer = Buffer.from(req.body.email);
+    
+    User.findOne({email: buffer})
     .then(user => {
         if(!user){
             return res.status(401).json({message: "Cet email n'est pas valide"})
         }
+        console.log(user)
         bcrypt.compare(req.body.password, user.password)
         .then(valid => {
             if (!valid){
@@ -40,7 +47,6 @@ exports.login = (req, res, next) => {
     })
     .catch(() => res.status(500).json({message: "login impossible"}))   
 }
-
 
 
 
