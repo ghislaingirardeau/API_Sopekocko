@@ -6,7 +6,7 @@ const salt = 10
 
 exports.signup = (req, res, next) => {
 
-    var buffer = Buffer.from(req.body.email, 'base64');
+    var buffer = Buffer.from(req.body.email, process.env.BUFF_ENC);
 
     bcrypt.hash(req.body.password, salt)
     .then(hash => {
@@ -14,7 +14,7 @@ exports.signup = (req, res, next) => {
             email: buffer,
             password: hash
         })
-        console.log(utilisateur)
+        
         utilisateur.save()
         .then(() => res.status(201).json({ message: 'Utilisateur créé'}))
         .catch(() => res.status(401).json({message: "Cet email est deja utilisé"}))  
@@ -25,7 +25,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     
-    var buffer = Buffer.from(req.body.email, 'base64');
+    var buffer = Buffer.from(req.body.email, process.env.BUFF_ENC);
     
     User.findOne({email: buffer})
     .then(user => {

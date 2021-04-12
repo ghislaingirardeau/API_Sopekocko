@@ -3,7 +3,7 @@ const uniqueValidator = require('mongoose-unique-validator')
 const mongooseHidden = require('mongoose-hidden')()
 
 const utilisateurSchema = new mongoose.Schema({
-    email: {type: String, require: true, unique: true, hide: false}, 
+    email: {type: String, require: true, unique: true, hide: true}, 
     password: {type: String, require: true}
 })
 
