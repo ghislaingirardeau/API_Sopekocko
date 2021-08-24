@@ -9,6 +9,10 @@ exports.toutesLesSauces = (req, res, next) => {
 }
 
 exports.createSauce = (req, res, next) => {
+    console.log(req.protocol, req.file.filename)
+    console.log(req.body)
+    console.log(req.body.sauce)
+    console.log(req.body.image)
 
     const sauceOject = JSON.parse(req.body.sauce)
     const sauce = new sauces({

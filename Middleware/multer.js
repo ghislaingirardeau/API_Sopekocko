@@ -11,6 +11,7 @@ const storage = multer.diskStorage({
         event(null, "images")
     },
     filename: function (req, file, event) {
+        console.log(file)
         const name = file.originalname.split(' ').join("_")
         const extension = MIME_TYPE[file.mimetype]
         const newName = name.slice(0, -4) /* POUR SUPPR EXTENSION NAME ORIGINALE */
@@ -19,3 +20,4 @@ const storage = multer.diskStorage({
 })
 
 module.exports = multer({storage}).single('image') /* SINGLE POUR AVOIR UNE SEULE IMAGE */
+/* 'image' fieldname réponse de l'objet input type name="image"  */
