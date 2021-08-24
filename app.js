@@ -26,6 +26,7 @@ app.use((req, res, next) => {
   next()
 })    
 
+app.get('/', (req, res) => res.send('Working!!!'));
 app.use(express.json())
 
 app.use('/images', express.static(path.join(__dirname, 'images')))
